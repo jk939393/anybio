@@ -1,11 +1,39 @@
 openapi: 3.0.1
 info:
-  title: bio search plugin
+  title: Science Paper Genius
   description: A plugin that allows the user to perform custom searches for bio articles.
   version: 'v1'
 servers:
   - url: http://localhost:5003
 paths:
+  /page_utilizerutilizer/{url}:
+    get:
+      operationId: page_utilizer
+      summary: Scrape the content of a webpage
+      parameters:
+      - in: path
+        name: url
+        schema:
+            type: string
+        required: true
+        description: The URL of the webpage to scrape.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                    description: The scraped content of the webpage.
+        "500":
+          description: Server error
+
+
+
+
   /bio_search/{query}:
     get:
       operationId: get_bio_search_results

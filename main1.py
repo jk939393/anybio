@@ -2,6 +2,7 @@ import json
 
 import quart
 import quart_cors
+from bs4 import BeautifulSoup
 from quart import request
 import requests
 import re
@@ -18,97 +19,130 @@ BASE_URL = "https://www.googleapis.com/customsearch/v1"
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 #pubmed
 
-@app.route("/bio_search/<string:query>", methods=['GET'])
-async def get_bio_search_results(query, page=1):
+# @app.route("/bio_search/<string:query>", methods=['GET'])
+# async def get_bio_search_results(query, page=1):
+#     try:
+#         random_choice = random.choice([(API_KEY, CX), (API_KEY2, CX2)])
+#         a, b = random_choice
+#
+#
+#         # Calculate the start index for pagination
+#         page = int(request.args.get('page', 1))
+#         num = int(request.args.get('results',1))
+#         # Extract dates from the query using a regular expression
+#         dates = re.findall(
+#             r'((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2},\s+\d{4}|\d{1,2}\s+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}|\d{4})',
+#             query, re.IGNORECASE)
+#
+#         # Process the extracted dates to construct start_date and end_date
+#         if dates:
+#             processed_dates = [datetime.strptime(date, '%B %d, %Y') if re.match(
+#                 r'(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
+#                 date, re.IGNORECASE) else datetime.strptime(date, '%d %B %Y') if re.match(
+#                 r'\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}',
+#                 date, re.IGNORECASE) else datetime.strptime(date, '%B %Y') if re.match(
+#                 r'(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}',
+#                 date, re.IGNORECASE) else datetime.strptime(date, '%Y') for date in dates]
+#             start_date = min(processed_dates).strftime('%Y%m%d')
+#             end_date = max(processed_dates).strftime('%Y%m%d')
+#         else:
+#             start_date = None
+#             end_date = None
+#
+#         start_index = (page - 1) * 5 + 1
+#
+#         if start_date and end_date:
+#             formattedDate = f'date:r:{start_date}:{end_date}'
+#         else:
+#             formattedDate = None
+#
+#         params = {
+#             "q": query,
+#             "cx": b,  # Use the randomly chosen CX value
+#             "key": a,  # Use the randomly chosen API key
+#             "num": num,
+#             "start": start_index,
+#             "sort": formattedDate
+#         }
+#
+#
+#
+#         # Print the full URL with all the parameters
+#         full_url = f"{BASE_URL}?{'&'.join([f'{k}={v}' for k, v in params.items()])}"
+#         print(f"Full URL: {full_url}")
+#         print(a)
+#         print(b)
+#         response = requests.get(BASE_URL, params=params)
+#
+#         if response.status_code != 200:
+#             print(f"Unexpected status code from Google: {response.status_code}")
+#             print(f"Response content: {response.text}")
+#             return quart.Response(response.text, status=response.status_code)
+#
+#         data = response.json()
+#
+#         # Print total results
+#         total_results = data.get('searchInformation', {}).get('totalResults', 0)
+#
+#         result_data = []
+#         for i, item in enumerate(data.get('items', [])):
+#             result_data.append({
+#                 "index": start_index + i,
+#                 "title": item.get('title'),
+#                 "link": item.get('link'),
+#                 "snippet": item.get('snippet')
+#             })
+#
+#         result = {
+#             "role": "assistant",
+#             "content": [
+#                 f"Here are the total results found: {total_results} (say exact amount found)",
+#                 f"This was page {page} (do not forgot to say this). Please say 'more' for more results."
+#                 f"You can specify seeing up to 5 results, you are now seeing {num}"
+#
+#             ],
+#             "current_page": page,
+#             "total_results": total_results,
+#             "results": result_data
+#         }
+#
+#         return quart.Response(json.dumps(result), status=200, content_type='application/json')
+#     except Exception as e:
+#         print(f"An error occurred: {e}")
+#         return quart.Response(f"An error occurred: {e}", status=500)
+
+
+
+_TODOS = {}
+#
+# @app.get("/todos/<string:username>")
+# async def get_todos(username):
+#     return quart.Response(response=json.dumps(_TODOS.get(username, [])), status=200)
+
+from bs4 import BeautifulSoup
+import requests
+
+@app.route("/page_utilizer/<string:url>", methods=['GET'])
+async def page_utilizer(url):
     try:
-        random_choice = random.choice([(API_KEY, CX), (API_KEY2, CX2)])
-        a, b = random_choice
+        # Fetch the content of the webpage
+        response = requests.get(url)
+        response.raise_for_status()
 
+        # Parse the webpage using BeautifulSoup
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-        # Calculate the start index for pagination
-        page = int(request.args.get('page', 1))
-        num = int(request.args.get('results',5))
-        # Extract dates from the query using a regular expression
-        dates = re.findall(
-            r'((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2},\s+\d{4}|\d{1,2}\s+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}|\d{4})',
-            query, re.IGNORECASE)
+        # For demonstration purposes, let's extract all the text from the webpage.
+        # You can modify this to extract specific elements or data as needed.
+        webpage_text = soup.get_text(strip=True)
 
-        # Process the extracted dates to construct start_date and end_date
-        if dates:
-            processed_dates = [datetime.strptime(date, '%B %d, %Y') if re.match(
-                r'(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
-                date, re.IGNORECASE) else datetime.strptime(date, '%d %B %Y') if re.match(
-                r'\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}',
-                date, re.IGNORECASE) else datetime.strptime(date, '%B %Y') if re.match(
-                r'(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}',
-                date, re.IGNORECASE) else datetime.strptime(date, '%Y') for date in dates]
-            start_date = min(processed_dates).strftime('%Y%m%d')
-            end_date = max(processed_dates).strftime('%Y%m%d')
-        else:
-            start_date = None
-            end_date = None
+        return quart.Response(response=json.dumps({"content": webpage_text}), status=200, content_type='application/json')
 
-        start_index = (page - 1) * 5 + 1
-
-        if start_date and end_date:
-            formattedDate = f'date:r:{start_date}:{end_date}'
-        else:
-            formattedDate = None
-
-        params = {
-            "q": query,
-            "cx": b,  # Use the randomly chosen CX value
-            "key": a,  # Use the randomly chosen API key
-            "num": num,
-            "start": start_index,
-            "sort": formattedDate
-        }
-
-
-
-        # Print the full URL with all the parameters
-        full_url = f"{BASE_URL}?{'&'.join([f'{k}={v}' for k, v in params.items()])}"
-        print(f"Full URL: {full_url}")
-        print(a)
-        print(b)
-        response = requests.get(BASE_URL, params=params)
-
-        if response.status_code != 200:
-            print(f"Unexpected status code from Google: {response.status_code}")
-            print(f"Response content: {response.text}")
-            return quart.Response(response.text, status=response.status_code)
-
-        data = response.json()
-
-        # Print total results
-        total_results = data.get('searchInformation', {}).get('totalResults', 0)
-
-        result_data = []
-        for i, item in enumerate(data.get('items', [])):
-            result_data.append({
-                "index": start_index + i,
-                "title": item.get('title'),
-                "link": item.get('link'),
-                "snippet": item.get('snippet')
-            })
-
-        result = {
-            "role": "assistant",
-            "content": [
-                f"Here are the total results found: {total_results} (say exact amount found)",
-                f"This was page {page} (do not forgot to say this). Please say 'more' for more results."
-                f"You can specify seeing up to 5 results, you are now seeing {num}"
-
-            ],
-            "current_page": page,
-            "total_results": total_results,
-            "results": result_data
-        }
-
-        return quart.Response(json.dumps(result), status=200, content_type='application/json')
+    except requests.RequestException as e:
+        return quart.Response(f"Failed to fetch the webpage: {e}", status=500)
     except Exception as e:
-        print(f"An error occurred: {e}")
         return quart.Response(f"An error occurred: {e}", status=500)
+
 
 
 
