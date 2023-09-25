@@ -1,7 +1,7 @@
 {
     "schema_version": "v1",
-    "name_for_human": "Science Paper Genius",
-    "name_for_model": "Science Paper Genius",
+    "name_for_human": "bioRxiv Research Extracor",
+    "name_for_model": "BioResearchExtractor",
     "description_for_human": "Biology and Science research made easy. Fetch and read bioRxiv papers.",
     "description_for_model": "Plugin tailored for bio research. Fetch, access, and read bioRxiv articles.",
     "auth": {
@@ -13,6 +13,6 @@
     },
     "logo_url": "https://i.ibb.co/YQXRQsP/logo.png",
     "contact_email": "researchbutler@anygpt.ai",
-    "legal_info_url": "http://anybio.anygpt.ai/legal"
+    "legal_info_url": "http://www.anybio.anygpt.ai/legal"
   }
   
