@@ -4,15 +4,16 @@ info:
   description: A plugin that allows the user to perform custom searches for bio articles.
   version: 'v1'
 servers:
-  - url: http://localhost:5003
+  - url: https://anypubmed.anygpt.ai
 paths:
-  /page_utilizerutilizer/{url}:
+  /page_utilizer/{query}:
     get:
-      operationId: page_utilizer
+      operationId: getPageContent
       summary: Scrape the content of a webpage
+      description: Fetches and returns the content of the specified webpage.
       parameters:
       - in: path
-        name: url
+        name: query
         schema:
             type: string
         required: true
@@ -30,6 +31,7 @@ paths:
                     description: The scraped content of the webpage.
         "500":
           description: Server error
+
 
 
 

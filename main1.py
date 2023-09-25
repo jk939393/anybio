@@ -8,6 +8,8 @@ import requests
 import re
 from datetime import datetime
 import random
+import httpx
+import os
 API_KEY = "AIzaSyBbvhM0tfQDlrI2ndRbZAN1YKBmwwStIrw"
 API_KEY2 = "AIzaSyBbvhM0tfQDlrI2ndRbZAN1YKBmwwStIrw"
 
@@ -122,23 +124,24 @@ _TODOS = {}
 from bs4 import BeautifulSoup
 import requests
 
-@app.route("/page_utilizer/<string:url>", methods=['GET'])
-async def page_utilizer(url):
+
+@app.route("/page_utilizer/<string:query>", methods=['GET'])
+async def page_utilizer(query):
     try:
-        # Fetch the content of the webpage
-        response = requests.get(url)
-        response.raise_for_status()
+        # Fetch the content of the webpage asynchronously
+        async with httpx.AsyncClient() as client:
+            response = await client.get(query)
+            response.raise_for_status()
 
         # Parse the webpage using BeautifulSoup
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        # For demonstration purposes, let's extract all the text from the webpage.
-        # You can modify this to extract specific elements or data as needed.
+        # Extract all the text from the webpage
         webpage_text = soup.get_text(strip=True)
 
-        return quart.Response(response=json.dumps({"content": webpage_text}), status=200, content_type='application/json')
+        return quart.jsonify({"content": webpage_text})
 
-    except requests.RequestException as e:
+    except httpx.RequestError as e:
         return quart.Response(f"Failed to fetch the webpage: {e}", status=500)
     except Exception as e:
         return quart.Response(f"An error occurred: {e}", status=500)
@@ -150,6 +153,25 @@ async def page_utilizer(url):
 async def plugin_logo():
     filename = 'logo.png'
     return await quart.send_file(filename, mimetype='image/png')
+
+# @app.route("/.well-known/ai-plugin.json", methods=['GET'])
+# async def plugin_manifest():
+#     try:
+#         async with httpx.AsyncClient() as client:
+#             response = await client.get("https://anybio.anygpt.ai/.well-known/ai-plugin.json")
+#         print(f"Request headers: {request.headers}")
+#         print(f"Current working directory: {os.getcwd()}")
+#
+#         print(f"Received response: {response.text}")  # Print the response
+#
+#         if response.status_code == 200:
+#             json_data = response.text  # Get the JSON as a string
+#             return Response(json_data, mimetype="application/json")
+#         else:
+#             return f"Failed to fetch data. Status code: {response.status_code}", 400
+#     except Exception as e:
+#         print(f"An error occurred: {e}")  # Print the exception
+#         return str(e), 500
 
 @app.get("/.well-known/ai-plugin.json")
 async def plugin_manifest():
@@ -164,9 +186,10 @@ async def openapi_spec():
     with open("openapi.yaml") as f:
         text = f.read()
         return quart.Response(text, mimetype="text/yaml")
+port = int(os.environ.get("PORT", 5000))
 
 def main():
-    app.run(debug=True, host="0.0.0.0", port=5003)
+    app.run(debug=True, host="0.0.0.0", port=port)
 
 if __name__ == "__main__":
     main()

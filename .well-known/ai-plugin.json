@@ -1,18 +1,18 @@
 {
     "schema_version": "v1",
-    "name_for_human": "BioBrite Research",
-    "name_for_model": "BioBrite",
-    "description_for_human": "Bio research made easy. Fetch and read bioRxiv papers.",
+    "name_for_human": "Science Paper Genius",
+    "name_for_model": "Science Paper Genius",
+    "description_for_human": "Biology and Science research made easy. Fetch and read bioRxiv papers.",
     "description_for_model": "Plugin tailored for bio research. Fetch, access, and read bioRxiv articles.",
     "auth": {
       "type": "none"
     },
     "api": {
       "type": "openapi",
-      "url": "http://localhost:5003/openapi.yaml"
+      "url": "http://anybio.anygpt.ai/openapi.yaml"
     },
     "logo_url": "https://i.ibb.co/YQXRQsP/logo.png",
-    "contact_email": "legal@example.com",
-    "legal_info_url": "http://example.com/legal"
+    "contact_email": "researchbutler@anygpt.ai",
+    "legal_info_url": "http://anybio.anygpt.ai/legal"
   }
   
