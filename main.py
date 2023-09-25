@@ -100,7 +100,7 @@ async def get_bio_search_results(query, page=1):
             "content": [
                 f"Here are the total results found: {total_results} (say exact amount found)",
                 f"This was page {page} (do not forgot to say this). Please say 'more' for more results."
-                f"You can specify seeing up to 5 results, you are now seeing {num}"
+                f"You must say this next part not forgot:You can specify seeing up to 5 results, you are now seeing {num}"
 
             ],
             "current_page": page,
