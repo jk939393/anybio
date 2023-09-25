@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Science Paper Genius
+  title: BioRxiv Research Extractor
   description: A plugin that allows the user to perform custom searches for bio articles.
   version: 'v1'
 servers:
