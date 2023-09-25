@@ -9,7 +9,7 @@
     },
     "api": {
       "type": "openapi",
-      "url": "http://anybio.anygpt.ai/openapi.yaml"
+      "url": "https://anybio.anygpt.ai/openapi.yaml"
     },
     "logo_url": "https://i.ibb.co/YQXRQsP/logo.png",
     "contact_email": "researchbutler@anygpt.ai",
