@@ -1,0 +1,1 @@
+curl -X GET "https://www.googleapis.com/customsearch/v1?key=AIzaSyBBqPWmXUkgnessbwHyAueFBPa6UDBMPRo&cx=4299ecf0db6824aae&q=medicine&sort=date:r:20200708:20210808"
