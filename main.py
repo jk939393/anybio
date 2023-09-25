@@ -92,7 +92,7 @@ async def get_bio_search_results(query, page=1):
                 "index": start_index + i,
                 "title": item.get('title'),
                 "link": item.get('link'),
-                "snippet": item.get('snippet')
+                "Summary": item.get('snippet')
             })
 
         result = {
