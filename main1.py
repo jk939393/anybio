@@ -125,26 +125,26 @@ from bs4 import BeautifulSoup
 import requests
 
 
-@app.route("/page_utilizer/<string:query>", methods=['GET'])
-async def page_utilizer(query):
-    try:
-        # Fetch the content of the webpage asynchronously
-        async with httpx.AsyncClient() as client:
-            response = await client.get(query)
-            response.raise_for_status()
-
-        # Parse the webpage using BeautifulSoup
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # Extract all the text from the webpage
-        webpage_text = soup.get_text(strip=True)
-
-        return quart.jsonify({"content": webpage_text})
-
-    except httpx.RequestError as e:
-        return quart.Response(f"Failed to fetch the webpage: {e}", status=500)
-    except Exception as e:
-        return quart.Response(f"An error occurred: {e}", status=500)
+# @app.route("/page_utilizer/<string:query>", methods=['GET'])
+# async def page_utilizer(query):
+#     try:
+#         # Fetch the content of the webpage asynchronously
+#         async with httpx.AsyncClient() as client:
+#             response = await client.get(query)
+#             response.raise_for_status()
+#
+#         # Parse the webpage using BeautifulSoup
+#         soup = BeautifulSoup(response.content, 'html.parser')
+#
+#         # Extract all the text from the webpage
+#         webpage_text = soup.get_text(strip=True)
+#
+#         return quart.jsonify({"content": webpage_text})
+#
+#     except httpx.RequestError as e:
+#         return quart.Response(f"Failed to fetch the webpage: {e}", status=500)
+#     except Exception as e:
+#         return quart.Response(f"An error occurred: {e}", status=500)
 
 
 

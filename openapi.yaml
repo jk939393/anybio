@@ -6,35 +6,31 @@ info:
 servers:
   - url: https://anypubmed.anygpt.ai
 paths:
-  /page_utilizer/{query}:
-    get:
-      operationId: getPageContent
-      summary: Scrape the content of a webpage
-      description: Fetches and returns the content of the specified webpage.
-      parameters:
-      - in: path
-        name: query
-        schema:
-            type: string
-        required: true
-        description: The URL of the webpage to scrape.
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  content:
-                    type: string
-                    description: The scraped content of the webpage.
-        "500":
-          description: Server error
-
-
-
-
+#  /page_utilizer/{query}:
+#    get:
+#      operationId: getPageContent
+#      summary: Scrape the content of a webpage
+#      description: Fetches and returns the content of the specified webpage.
+#      parameters:
+#      - in: path
+#        name: query
+#        schema:
+#            type: string
+#        required: true
+#        description: The URL of the webpage to scrape.
+#      responses:
+#        "200":
+#          description: OK
+#          content:
+#            application/json:
+#              schema:
+#                type: object
+#                properties:
+#                  content:
+#                    type: string
+#                    description: The scraped content of the webpage.
+#        "500":
+#          description: Server error
 
   /bio_search/{query}:
     get:
