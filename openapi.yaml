@@ -10,7 +10,7 @@ paths:
   /google_search/{query}:
     get:
       operationId: get_google_search_results
-      summary: Get search results with bioRxiv
+      summary: Get search results with bioRxiv for anything scienc
       description: Retrieves search results from Google Custom Search based on the query parameter.
       parameters:
         - in: path
