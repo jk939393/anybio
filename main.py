@@ -20,6 +20,9 @@ BASE_URL = "https://www.googleapis.com/customsearch/v1"
 
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 #anybio
+@app.route("/")
+async def hello():
+    return "Hello, World "
 
 @app.route("/bio_search/<string:query>", methods=['GET'])
 async def get_bio_search_results(query, page=1):
@@ -122,7 +125,6 @@ async def get_bio_search_results(query, page=1):
 #     return quart.Response(response=json.dumps(_TODOS.get(username, [])), status=200)
 
 from bs4 import BeautifulSoup
-import requests
 
 
 # @app.route("/page_utilizer/<string:query>", methods=['GET'])
