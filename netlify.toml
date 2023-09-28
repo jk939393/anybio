@@ -1,10 +1,10 @@
 [[redirects]]
   from = "/bio_search/*"
-  to = "https://anybio-d5752deb0c4d.herokuapp.com/bio_search/:splat"
+  to = "https://anybio-37ddf38f06f8.herokuapp.com/bio_search/:splat"
   status = 200
 [[redirects]]
   from = "/.well-known/*"
-  to = "https://anybio-d5752deb0c4d.herokuapp.com/.well-known/:splat"
+  to = "https://anybio-37ddf38f06f8.herokuapp.com/.well-known/:splat"
   status = 200
 
 [[headers]]
