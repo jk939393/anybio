@@ -6,36 +6,11 @@ info:
 servers:
   - url: https://anybio.anygpt.ai
 paths:
-#  /page_utilizer/{query}:
-#    get:
-#      operationId: getPageContent
-#      summary: Scrape the content of a webpage
-#      description: Fetches and returns the content of the specified webpage.
-#      parameters:
-#      - in: path
-#        name: query
-#        schema:
-#            type: string
-#        required: true
-#        description: The URL of the webpage to scrape.
-#      responses:
-#        "200":
-#          description: OK
-#          content:
-#            application/json:
-#              schema:
-#                type: object
-#                properties:
-#                  content:
-#                    type: string
-#                    description: The scraped content of the webpage.
-#        "500":
-#          description: Server error
 
-  /bio_search/{query}:
+  /google_search/{query}:
     get:
-      operationId: get_bio_search_results
-      summary: Get Google Custom Search results for bio articles
+      operationId: get_google_search_results
+      summary: Get search results with bioRxiv
       description: Retrieves search results from Google Custom Search based on the query parameter.
       parameters:
         - in: path

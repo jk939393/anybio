@@ -24,8 +24,8 @@ app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.c
 async def hello():
     return "Hello, World "
 
-@app.route("/bio_search/<string:query>", methods=['GET'])
-async def get_bio_search_results(query, page=1):
+@app.route("/google_search/<string:query>", methods=['GET'])
+async def get_google_search_results(query, page=1):
     try:
         random_choice = random.choice([(API_KEY, CX), (API_KEY2, CX2)])
         a, b = random_choice
@@ -115,41 +115,6 @@ async def get_bio_search_results(query, page=1):
     except Exception as e:
         print(f"An error occurred: {e}")
         return quart.Response(f"An error occurred: {e}", status=500)
-
-
-
-# _TODOS = {}
-#
-# @app.get("/todos/<string:username>")
-# async def get_todos(username):
-#     return quart.Response(response=json.dumps(_TODOS.get(username, [])), status=200)
-
-from bs4 import BeautifulSoup
-
-
-# @app.route("/page_utilizer/<string:query>", methods=['GET'])
-# async def page_utilizer(query):
-#     try:
-#         # Fetch the content of the webpage asynchronously
-#         async with httpx.AsyncClient() as client:
-#             response = await client.get(query)
-#             response.raise_for_status()
-#
-#         # Parse the webpage using BeautifulSoup
-#         soup = BeautifulSoup(response.content, 'html.parser')
-#
-#         # Extract all the text from the webpage
-#         webpage_text = soup.get_text(strip=True)
-#
-#         return quart.jsonify({"content": webpage_text})
-#
-#     except httpx.RequestError as e:
-#         return quart.Response(f"Failed to fetch the webpage: {e}", status=500)
-#     except Exception as e:
-#         return quart.Response(f"An error occurred: {e}", status=500)
-
-
-
 
 @app.get("/logo.png")
 async def plugin_logo():
