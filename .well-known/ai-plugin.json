@@ -1,7 +1,7 @@
 {
     "schema_version": "v1",
     "name_for_human": "BioRxiv Researcher",
-    "name_for_model": "BioResearchExtractor",
+    "name_for_model": "BioResearchResearcher",
     "description_for_human": "Biology and Science research made easy. Fetch and read bioRxiv papers.",
     "description_for_model": "Plugin tailored for bio research. Fetch, access, and read bioRxiv articles.",
     "auth": {
