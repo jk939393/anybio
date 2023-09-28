@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/google_search/*"
-  to = "https://anybio-37ddf38f06f8.herokuapp.com/bio_search/:splat"
+  to = "https://anybio-37ddf38f06f8.herokuapp.com/google_search/:splat"
   status = 200
 [[redirects]]
   from = "/.well-known/*"
