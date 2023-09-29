@@ -22,7 +22,7 @@ app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.c
 #anybio
 @app.route("/")
 async def hello():
-    return "Hello, World "
+    return "Hello, World1 "
 
 @app.route("/google_search/<string:query>", methods=['GET'])
 async def get_google_search_results(query, page=1):
