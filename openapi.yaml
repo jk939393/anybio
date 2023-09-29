@@ -4,7 +4,7 @@ info:
   description: A plugin that allows the user to perform custom searches for bio articles.
   version: 'v1'
 servers:
-  - url: https://anybio.anygpt.ai
+  - url: https://anybio2.anygpt.ai
 paths:
 
   /google_search/{query}:

@@ -125,7 +125,7 @@ async def plugin_logo():
 async def plugin_manifest():
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get("https://anybio.anygpt.ai/.well-known/ai-plugin.json")
+            response = await client.get("https://anybio2.anygpt.ai/.well-known/ai-plugin.json")
         print(f"Request headers: {request.headers}")
         print(f"Current working directory: {os.getcwd()}")
 

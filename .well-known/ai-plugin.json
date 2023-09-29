@@ -9,9 +9,9 @@
     },
     "api": {
       "type": "openapi",
-      "url": "https://anybio.anygpt.ai/openapi.yaml"
+      "url": "https://anybio2.anygpt.ai/openapi.yaml"
     },
     "logo_url": "https://i.ibb.co/VM1Qq09/Untitled-design-7.png",
     "contact_email": "researchbutler@anygpt.ai",
-    "legal_info_url": "http://www.anybio.anygpt.ai/legal"
+    "legal_info_url": "http://www.anybio2.anygpt.ai/legal"
   }
