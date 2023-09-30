@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: BioRxiv Research Extractor
-  description: A plugin that allows the user to perform custom searches for bio articles.
+  title: Google Custom Search Plugin
+  description: A plugin that allows the user to perform Google custom searches.
   version: 'v1'
 servers:
   - url: https://anybio2.anygpt.ai
@@ -10,7 +10,7 @@ paths:
   /google_search/{query}:
     get:
       operationId: get_google_search_results
-      summary: Get search results with bioRxiv for anything scienc
+      summary: Get Google Custom Search results
       description: Retrieves search results from Google Custom Search based on the query parameter.
       parameters:
         - in: path
