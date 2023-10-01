@@ -3,7 +3,7 @@
     "name_for_human": "BioRxiv Researcher",
     "name_for_model": "BioRxiv Researcherr",
     "description_for_human": "Biology and Science research made easy. Fetch and read bioRxiv papers.",
-    "description_for_model": "Anapplication leveraging Google Custom Search for the most comprehensive BioRxiv research articles search experience.",
+    "description_for_model": "An application leveraging Google Custom Search for the most comprehensive BioRxiv research articles search experience.",
     "auth": {
       "type": "none"
     },
