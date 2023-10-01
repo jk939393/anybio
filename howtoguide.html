@@ -27,16 +27,9 @@
             margin: 20px 0;
         }
 
-        #close-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: red;
-            color: white;
-            padding: 0.875rem 0.75rem;
-            border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
+        .highlight {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -48,15 +41,15 @@
     <img src="https://ed3cc36e4da8918fbfe790aa5b09beb3.auth.portal-pluginlab.ai/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fpluginlab.appspot.com%2Fo%2Fpublic%252Fplugins%252Fed3cc36e4da8918fbfe790aa5b09beb3%252Flogo%3Falt%3Dmedia%26token%3Dc303c882-3c34-4ac8-86be-b22db388f254&w=1920&q=75" alt="bioRxiv Plugin Logo">
 
     <h3> Fetching Papers:</h3>
-    <p>To fetch a paper, simply type your request in the ChatGPT interface. Examples:</p>
+    <p>To fetch a <span class="highlight">paper</span>, simply type your request in the ChatGPT interface. Examples:</p>
     <ul>
-        <li>"Get a research paper on molecules from bioRxiv."</li>
-        <li>"Find me a bioRxiv paper on sharks."</li>
-        <li>"Show nuclear fusion research papers from bioRxiv after 2022."</li>
+        <li>"Get a <span class="highlight">research paper</span> on molecules from bioRxiv."</li>
+        <li>"Find me a bioRxiv <span class="highlight">paper</span> on sharks."</li>
+        <li>"Show nuclear fusion <span class="highlight">research</span> <span class="highlight">papers</span> from bioRxiv after 2022."</li>
     </ul>
 
     <h3>Navigating Results:</h3>
-    <p>ChatGPT will display a list of relevant papers based on your query.</p>
+    <p>ChatGPT will display a list of relevant <span class="highlight">papers</span> based on your query.</p>
     <ul>
         <li>Click on any title to view more details.</li>
         <li>If you wish to see more results or navigate to a different page of results, use commands like:</li>
@@ -66,17 +59,9 @@
         </ul>
     </ul>
 
-    <!-- Close button -->
-    <button id="close-button" onclick="window.parent.postMessage('closeIframe', '*');">Close</button>
+    <p><strong>Note:</strong> The plugin is activated by the keywords "<span class="highlight">research</span>" and "<span class="highlight">paper</span>".</p>
 
-    <script>
-        // Listen for the 'closeIframe' message from the parent window and close the iframe
-        window.addEventListener('message', function(event) {
-            if (event.data === 'closeIframe') {
-                window.close();
-            }
-        });
-    </script>
 </body>
 
 </html>
+
