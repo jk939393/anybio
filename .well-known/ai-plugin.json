@@ -1,9 +1,9 @@
 {
     "schema_version": "v1",
     "name_for_human": "BioRxiv Researcher",
-    "name_for_model": "BioResearchResearcher",
+    "name_for_model": "BioRxiv Researcherr",
     "description_for_human": "Biology and Science research made easy. Fetch and read bioRxiv papers.",
-    "description_for_model": "Search for anything science or biology relates or as in any research paper or article",
+    "description_for_model": "Anapplication leveraging Google Custom Search for the most comprehensive BioRxiv research articles search experience.",
     "auth": {
       "type": "none"
     },
