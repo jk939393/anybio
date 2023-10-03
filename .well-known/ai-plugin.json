@@ -2,7 +2,7 @@
     "schema_version": "v1",
     "name_for_human": "BioRxiv Researcher",
     "name_for_model": "BioRxivResearcher",
-    "description_for_human": "The most powerful BioRxiv search tool, powered by Google Custom Search! Find research articles swiftly and easily. \n",
+    "description_for_human": "The most powerful science research tool, powered by Google Custom Search! Find research articles swiftly and easily. . \n",
     "description_for_model": "An application leveraging Google Custom Search for the most comprehensive BioRxiv research articles search experience",
     "auth": {
       "type": "none"
